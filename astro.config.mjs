@@ -8,9 +8,9 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   integrations: [
     starlight({
-      title: "Example Site Template",
+      title: "Examples LogicFlow",
       social: {
-        github: "https://github.com/ChangeSuger/example-site-template",
+        github: "https://github.com/ChangeSuger/examples-logicflow",
       },
       defaultLocale: "zh-CN",
       locales: {
