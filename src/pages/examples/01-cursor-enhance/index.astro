@@ -1,0 +1,133 @@
+---
+import "@logicflow/core/lib/style/index.css";
+import '@logicflow/extension/lib/style/index.css';
+import DocLayout from "@/layout/DocLayout.astro";
+import { Code } from '@astrojs/starlight/components';
+
+const exampleCode = `
+import LogicFlow from "@logicflow/core";
+import { SelectionSelect } from "@logicflow/extension";
+import { GlobalDrag } from "logicflow-plugin-global-drag";
+
+const lf = new LogicFlow({
+  container: document.querySelector("#container")!,
+  plugins: [GlobalDrag, SelectionSelect],
+  keyboard: {
+    enabled: true,
+  },
+});
+
+(lf.extension.selectionSelect as SelectionSelect).openSelectionSelect();
+
+const data = {
+  nodes: [
+    {
+      id: '10',
+      type: "rect",
+      x: 100,
+      y: 100,
+      text: "Hello",
+    },
+    {
+      id: '20',
+      type: "circle",
+      x: 300,
+      y: 100,
+      text: "World",
+    },
+    {
+      id: '30',
+      type: "circle",
+      x: 300,
+      y: 300,
+      text: "New World",
+    },
+  ],
+  edges: [
+    {
+      type: "line",
+      sourceNodeId: '10',
+      targetNodeId: '20',
+    },
+  ],
+};
+
+lf.render(data);
+`;
+---
+
+<DocLayout title="鼠标交互增强">
+  <p>这里通过 SelectSelection 与 GlobalDrag 两个插件，实现鼠标交互增强，包括：</p>
+  <ul>
+    <li>正常情况下，使用鼠标左键进行选区，被框选的元素会被选中</li>
+    <li>鼠标左键点击被选中元素进行拖拽</li>
+    <li>按住空格键时，可以通过点击画布任意区域进行全局拖拽</li>
+  </ul> 
+
+  <div id="container" class="w-full h-[400px]"></div>
+
+  <Code code={exampleCode} lang="ts" title="示例代码" />
+</DocLayout>
+
+<script>
+import LogicFlow from "@logicflow/core";
+import { SelectionSelect } from "@logicflow/extension";
+import { GlobalDrag } from "logicflow-plugin-global-drag";
+
+const lf = new LogicFlow({
+  container: document.querySelector("#container")!,
+  plugins: [GlobalDrag, SelectionSelect],
+  keyboard: {
+    enabled: true,
+  },
+});
+
+(lf.extension.selectionSelect as SelectionSelect).openSelectionSelect();
+
+const data = {
+  nodes: [
+    {
+      id: '10',
+      type: "rect",
+      x: 100,
+      y: 100,
+      text: "Hello",
+    },
+    {
+      id: '20',
+      type: "circle",
+      x: 300,
+      y: 100,
+      text: "World",
+    },
+    {
+      id: '30',
+      type: "circle",
+      x: 300,
+      y: 300,
+      text: "New World",
+    },
+  ],
+  edges: [
+    {
+      type: "line",
+      sourceNodeId: '10',
+      targetNodeId: '20',
+    },
+  ],
+};
+
+lf.render(data);
+</script>
+
+<style>
+#container {
+  * {
+    margin-top: 0px;
+  }
+
+  svg {
+    height: 100%;
+  }
+}
+</style>
