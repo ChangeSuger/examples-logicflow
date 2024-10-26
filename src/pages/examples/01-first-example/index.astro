@@ -1,0 +1,45 @@
+---
+import DocLayout from "@/layout/DocLayout.astro";
+import { Code } from '@astrojs/starlight/components';
+
+const exampleCode = `
+class MyComponent extends HTMLElement {
+  button: HTMLButtonElement;
+
+  constructor() {
+    super();
+    this.button = document.createElement('button');
+    this.button.textContent = 'Click me';
+    this.button.addEventListener('click', () => {
+      alert('Hello, Astro!');
+    });
+    this.appendChild(this.button);
+  }
+}
+
+customElements.define('my-component', MyComponent);
+`;
+---
+
+<DocLayout title="第一个示例">
+  <my-component />
+  <Code code={exampleCode} lang="js" title="示例代码" />
+</DocLayout>
+
+<script>
+class MyComponent extends HTMLElement {
+  button: HTMLButtonElement;
+
+  constructor() {
+    super();
+    this.button = document.createElement('button');
+    this.button.textContent = 'Click me';
+    this.button.addEventListener('click', () => {
+      alert('Hello, Astro!');
+    });
+    this.appendChild(this.button);
+  }
+}
+
+customElements.define('my-component', MyComponent);
+</script>
